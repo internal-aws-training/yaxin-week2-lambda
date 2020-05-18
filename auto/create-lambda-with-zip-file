@@ -1,0 +1,14 @@
+# create zip file
+zip ../file/function.zip ../file/index.js
+
+# create lambda function with `create-function` command
+aws lambda create-function --function-name yaxin-cli-test \
+--zip-file ../file/function.zip --handler index.handler --runtime nodejs12.x \
+--role arn:aws:iam::494526681395:role/service-role/LambdaService--yaxin
+
+# 1)invoke lambda and get logs, The response includes a LogResult field that contains up to 4 KB of base64-encoded logs from the invocation.
+aws lambda invoke --function-name yaxin-cli-test out --log-type Tail
+
+# 2)invoke lambda and use the base64 utility to decode the logs
+aws lambda invoke --function-name yaxin-cli-test out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
