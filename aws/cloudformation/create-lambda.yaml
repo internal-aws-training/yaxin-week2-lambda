@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  yaxinCloundformationTest:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: handler
+      Role: arn:aws:iam::494526681395:role/service-role/LambdaService--yaxin
+      Runtime: nodejs12.x
+      Timeout: 120
+      Code:
+        S3Bucket: aws-practice-yaxin
+        S3Key: lambdas/function.zip
